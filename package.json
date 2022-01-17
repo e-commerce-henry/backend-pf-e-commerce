@@ -1,0 +1,26 @@
+{
+  "name": "backend-pf-e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-commerce-henry/backend-pf-e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e-commerce-henry/backend-pf-e-commerce/issues"
+  },
+  "homepage": "https://github.com/e-commerce-henry/backend-pf-e-commerce#readme",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "postgres": "^1.0.2",
+    "sequelize": "^6.13.0"
+  }
+}
