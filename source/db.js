@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
 
 const basename = path.basename(__filename);
 const modelDefiners = [];
-
+//se leen todos los archivos de la carpeta Models, y se agregan al arreglo ModelDefiners
 fs.readFileSync(path.join(__dirname, "/models"))
 	.filter(
 		(file) =>
@@ -24,9 +24,9 @@ fs.readFileSync(path.join(__dirname, "/models"))
 	.forEach((file) => {
 		modelDefiners.push(require(path.join(__dirname, "/models", file)));
 	});
-
+//se inyecta conexion de sequelize a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
-
+//se capitalizam los nombres de todos los modelos
 let entries = Object.entries(sequelize.models);
 let capEntries = entries.map((entry) => [
 	entry[0][0].toUpperCase() + entry[0].slice(1),
@@ -34,5 +34,58 @@ let capEntries = entries.map((entry) => [
 ]);
 
 sequelize.models = Object.fromEntries(capEntries);
-
 console.log(sequelize.models);
+
+const {
+	Product,
+	Category,
+	Subcategory,
+	ClientAddress,
+	Order,
+	Orderdetail,
+	Review,
+	ShoppingCart,
+	ShoppingCartItems,
+	User,
+	UserLoginDetail,
+	Wishlist,
+	WishlistItems,
+} = sequelize.models;
+
+//relaciones entre tablas
+
+User.hasOne(ShoppingCart);
+ShoppingCart.belongsTo(User);
+ShoppingCart.hasMany(ShoppingCartItems);
+ShoppingCartItems.belongsTo(ShoppingCart);
+ShoppingCartItems.belongsTo(Product);
+Product.hasMany(ShoppingCartItems);
+
+User.hasMany(Order);
+Order.belongsTo(User);
+Order.hasMany(Orderdetail);
+Orderdetail.belongsTo(Order);
+Orderdetail.belongsTo(Product);
+Product.hasMany(Orderdetail);
+
+User.hasOne(UserLoginDetail);
+
+User.hasMany(ClientAddress);
+ClientAddress.belongsTo(User);
+
+User.hasOne(Wishlist);
+Wishlist.belongsTo(User);
+Wishlist.hasMany(WishlistItems);
+WishlistItems.belongsTo(Wishlist);
+Product.hasMany(WishlistItems);
+WishlistItems.belongsTo(Product);
+
+User.hasMany(Review);
+Review.belongsTo(User);
+Product.hasMany(Review);
+Review.belongsTo(Product);
+
+Product.belongsTo(Category);
+Category.hasMany(Product);
+Category.hasMany(Subcategory);
+Subcategory.belongsTo(Category);
