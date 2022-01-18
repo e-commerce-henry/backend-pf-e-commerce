@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const routes = require("./routes/index.js");
+// const routes = require("./routes/index.js"); commented until index.js from routes folder is not empty
 
 require("./db");
 
@@ -22,3 +22,19 @@ app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
 	next();
 });
+
+//Authentication method missing  - possible passport.js implementation
+
+//middleware to apply all the possible routes in server
+// app.use("/", routes); // commented until index.js from routes folder is not empty.
+
+// Error catching endware.
+app.use((err, req, res, next) => {
+	// eslint-disable-line no-unused-vars
+	const status = err.status || 500;
+	const message = err.message || err;
+	console.error(err);
+	res.status(status).send(message);
+});
+
+module.exports = app;
