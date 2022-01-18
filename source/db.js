@@ -50,6 +50,7 @@ const {
 	UserLoginDetail,
 	Wishlist,
 	WishlistItems,
+	SaleBanner,
 } = sequelize.models;
 
 //relaciones entre tablas
@@ -69,6 +70,7 @@ Orderdetail.belongsTo(Product);
 Product.hasMany(Orderdetail);
 
 User.hasOne(UserLoginDetail);
+UserLoginDetail.belongsTo(User);
 
 User.hasMany(ClientAddress);
 ClientAddress.belongsTo(User);
@@ -89,3 +91,11 @@ Product.belongsTo(Category);
 Category.hasMany(Product);
 Category.hasMany(Subcategory);
 Subcategory.belongsTo(Category);
+
+Product.belongsTo(SaleBanner);
+SaleBanner.hasMany(Product);
+
+module.exports = {
+	...sequelize.models,
+	conn: sequelize,
+};
