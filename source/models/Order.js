@@ -2,20 +2,21 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
 	sequelize.define("order", {
-		status:{
-			type: DataTypes.NUMBER,
-            allowNull:null,
-    
+		//la orden puede tener 3 estados:
+		// -procesando (una vez q el usuario agrega productos al carro y procede al pago)
+		// -cancelada (el usuario cancela la compra)
+		// -completada (el usuario efectuo la compra)
+		status: {
+			type: DataTypes.ENUM("processing", "cancelled", "completed"),
+			allowNull: false,
 		},
-        date:{
-            type:DataTypes.DATE,
-            allowNull:null,
-        },
-        shippingaddress:{
-            type:DataTypes.STRING,
-            allowNull:null,
-
-            
-        }
+		date: {
+			type: DataTypes.DATE,
+			allowNull: false,
+		},
+		shippingaddress: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
 	});
 };
