@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-	sequelize.define("sale_banner", {
+	sequelize.define("saleBanner", {
 		discount: {
 			type: DataTypes.FLOAT,
 			allowNull: false,

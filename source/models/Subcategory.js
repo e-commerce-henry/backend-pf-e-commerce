@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-	sequelize.define("sub_category", {
+	sequelize.define("subCategory", {
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
