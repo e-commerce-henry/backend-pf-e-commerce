@@ -1,10 +1,9 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-	sequelize.define("clientAddress", {
-		address: {
+	sequelize.define("wishlist", {
+		name: {
 			type: DataTypes.STRING,
-			allowNull: false,
 		},
 	});
 };

@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-	sequelize.define("password", {
-		password: {
-			type: DataTypes.STRING(30),
+	sequelize.define("cart", {
+		total: {
+			type: DataTypes.FLOAT,
 		},
 	});
 };
