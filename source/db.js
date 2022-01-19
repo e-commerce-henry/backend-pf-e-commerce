@@ -12,11 +12,11 @@ const sequelize = new Sequelize(
 		native: false,
 	}
 );
-
 const basename = path.basename(__filename);
+console.log(basename);
 const modelDefiners = [];
 //se leen todos los archivos de la carpeta Models, y se agregan al arreglo ModelDefiners
-fs.readFileSync(path.join(__dirname, "/models"))
+fs.readdirSync(path.join(__dirname, "/models"))
 	.filter(
 		(file) =>
 			file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
@@ -39,35 +39,35 @@ console.log(sequelize.models);
 const {
 	Product,
 	Category,
-	Subcategory,
+	SubCategory,
 	ClientAddress,
 	Order,
-	Orderdetail,
+	OrderDetail,
 	Review,
-	ShoppingCart,
-	ShoppingCartItems,
+	Cart,
+	CartItem,
 	User,
 	UserLoginDetail,
 	Wishlist,
-	WishlistItems,
+	WishlistItem,
 	SaleBanner,
 } = sequelize.models;
 
 //relaciones entre tablas
 
-User.hasOne(ShoppingCart);
-ShoppingCart.belongsTo(User);
-ShoppingCart.hasMany(ShoppingCartItems);
-ShoppingCartItems.belongsTo(ShoppingCart);
-ShoppingCartItems.belongsTo(Product);
-Product.hasMany(ShoppingCartItems);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.hasMany(CartItem);
+CartItem.belongsTo(Cart);
+CartItem.belongsTo(Product);
+Product.hasMany(CartItem);
 
 User.hasMany(Order);
 Order.belongsTo(User);
-Order.hasMany(Orderdetail);
-Orderdetail.belongsTo(Order);
-Orderdetail.belongsTo(Product);
-Product.hasMany(Orderdetail);
+Order.hasMany(OrderDetail);
+OrderDetail.belongsTo(Order);
+OrderDetail.belongsTo(Product);
+Product.hasMany(OrderDetail);
 
 User.hasOne(UserLoginDetail);
 UserLoginDetail.belongsTo(User);
@@ -77,10 +77,10 @@ ClientAddress.belongsTo(User);
 
 User.hasOne(Wishlist);
 Wishlist.belongsTo(User);
-Wishlist.hasMany(WishlistItems);
-WishlistItems.belongsTo(Wishlist);
-Product.hasMany(WishlistItems);
-WishlistItems.belongsTo(Product);
+Wishlist.hasMany(WishlistItem);
+WishlistItem.belongsTo(Wishlist);
+Product.hasMany(WishlistItem);
+WishlistItem.belongsTo(Product);
 
 User.hasMany(Review);
 Review.belongsTo(User);
@@ -89,8 +89,8 @@ Review.belongsTo(Product);
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
-Category.hasMany(Subcategory);
-Subcategory.belongsTo(Category);
+Category.hasMany(SubCategory);
+SubCategory.belongsTo(Category);
 
 Product.belongsTo(SaleBanner);
 SaleBanner.hasMany(Product);
