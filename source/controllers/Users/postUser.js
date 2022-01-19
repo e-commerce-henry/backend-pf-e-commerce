@@ -12,13 +12,19 @@ const createUser = async (req, res) => {
 		return res.status(409).send("That email has already been registered"); //conflict
 
 	try {
-		const hashedPwd = bcrypt.hash(pwd, 12);
+		const hashedPwd = await bcrypt.hash(pwd, 12);
 		const newUser = await User.create({
 			name: name,
 			surname: surname,
 			email: email,
 		});
+		console.log(hashedPwd);
+		await newUser.createUserLoginDetail({ password: hashedPwd });
+		res.status(201).send("New User created");
 	} catch (err) {
+		console.log(err);
 		res.status(500).send(err); // server error
 	}
 };
+
+module.exports = createUser;
