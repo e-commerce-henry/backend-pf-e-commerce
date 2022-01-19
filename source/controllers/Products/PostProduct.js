@@ -1,16 +1,37 @@
-const { Product } = requere('../../db.js')
-const PostProducts = async ( req, res, next ) => {
+const { Product,Category,SaleBanner } = require('../../db.js')
+const postProducts = async ( req, res, next ) => {
     try {
-        const {name, surname, stock, price, img, brand, description} = req.body
+        const {name, stock, price, img, brand, description, category, saleBanner} = req.body
+
+        let cat = await Category.findOne({
+            where:{
+                name:category
+            }
+        })
+
+        if (!cat) {
+            res.json({message:'No existe Category'})
+        }
+
+        let sale = await SaleBanner.findOne({
+            where:{
+                discount:saleBanner
+            }
+        })
+        if (!sale) {
+            res.json({message:'No existe saleBanner'})
+        }
+
             let [newProduc, created] = await Product.findOrCreate({
                 where:{name},
                 defaults:{
-                    surname,
                     stock,
                     price,
                     img,
                     brand,
-                    description
+                    description,
+                    categoryId: cat.id,
+                    saleBannerId:sale.id
                 }
             })
             res.status(200).json({created:created, newProduc});
@@ -20,5 +41,5 @@ const PostProducts = async ( req, res, next ) => {
 }
 
 module.exports={
-    PostProducts
+    postProducts
 }

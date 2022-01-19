@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-// const routes = require("./routes/index.js"); commented until index.js from routes folder is not empty
+const routes = require("./routes/index.js");// commented until index.js from routes folder is not empty
 
 require("./db");
 
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 //Authentication method missing  - possible passport.js implementation
 
 //middleware to apply all the possible routes in server
-// app.use("/", routes); // commented until index.js from routes folder is not empty.
+ app.use("/", routes); // commented until index.js from routes folder is not empty.
 
 // Error catching endware.
 app.use((err, req, res, next) => {

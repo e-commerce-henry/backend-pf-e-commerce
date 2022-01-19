@@ -1,7 +1,10 @@
-const { Product } = requere('../../db.js')
-const GetProducts = async ( req, res, next ) => {
+const { Product } = require('../../db.js');
+
+
+const getProducts = async ( req, res, next ) => {
     try {
-        let produc = await Product.findAll()
+        let produc = await Product.findAll();
+        console.log('produc :>> ', produc);
         if (produc.length ===0) {
             res.json({message:"no hay products"})
         } else {
@@ -12,5 +15,5 @@ const GetProducts = async ( req, res, next ) => {
     }
 }
 module.exports={
-    GetProducts
+    getProducts
 }

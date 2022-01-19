@@ -1,6 +1,6 @@
 const {Category} = require('../../db.js');
 
-const PostCategory = async(req, res, next) =>{
+const postCategory = async(req, res, next) =>{
     try {
     const {name} = req.body
         let [newCategory, created] = await Category.findOrCreate({
@@ -13,5 +13,5 @@ const PostCategory = async(req, res, next) =>{
 }
 
 module.exports = {
-    PostCategory
+    postCategory
 };

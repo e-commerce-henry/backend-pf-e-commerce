@@ -1,5 +1,5 @@
-const { Category } = requere('../../db.js')
-const GetCategory = async ( req, res, next ) => {
+const { Category } = require('../../db.js')
+const getCategory = async ( req, res, next ) => {
     try {
         let cat = await Category.findAll()
         if (cat.length ===0) {
@@ -12,5 +12,5 @@ const GetCategory = async ( req, res, next ) => {
     }
 }
 module.exports={
-    GetCategory
+    getCategory
 }
