@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
 		return res.status(409).send("That email has already been registered"); //conflict
 
 	try {
-		const hashedPwd = await bcrypt.hash(pwd, 12);
+		const hashedPwd = await bcrypt.hash(pwd, 12); //second param is number of SaltRounds to hash;
 		const newUser = await User.create({
 			name: name,
 			surname: surname,
