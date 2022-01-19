@@ -1,12 +1,18 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const routes = require("./routes/index.js");// commented until index.js from routes folder is not empty
+const passport = require("passport");
+const flash = require("express-flash");
+const routes = require("./routes/index.js"); // commented until index.js from routes folder is not empty
+const initializePassport = require("../passport-config");
 
 require("./db");
 
 const app = express();
+
+initializePassport(passport);
 
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -24,9 +30,47 @@ app.use((req, res, next) => {
 });
 
 //Authentication method missing  - possible passport.js implementation
+app.use(flash());
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+	})
+);
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //middleware to apply all the possible routes in server
- app.use("/", routes); // commented until index.js from routes folder is not empty.
+app.use("/", routes); // commented until index.js from routes folder is not empty.
+
+const ensureAuth = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect("/login");
+};
+
+app.post(
+	"/login",
+	passport.authenticate("local", {
+		successRedirect: "/",
+		failureRedirect: "/login",
+		failureFlash: true, //called from FrontEnd as messages.error
+	})
+);
+app.get("/", ensureAuth, (req, res) => {
+	res.send("gola");
+});
+app.get("/login", (req, res) => {
+	res.send("hola");
+});
+app.get("/logout", (req, res) => {
+	req.logout(); //clear session
+	res.redirect("/");
+});
 
 // Error catching endware.
 app.use((err, req, res, next) => {
