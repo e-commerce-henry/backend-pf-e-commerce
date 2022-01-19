@@ -34,7 +34,6 @@ let capEntries = entries.map((entry) => [
 ]);
 
 sequelize.models = Object.fromEntries(capEntries);
-console.log(sequelize.models);
 
 const {
 	Product,
