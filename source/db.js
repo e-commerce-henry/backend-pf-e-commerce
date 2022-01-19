@@ -91,8 +91,8 @@ Category.hasMany(Product);
 Category.hasMany(SubCategory);
 SubCategory.belongsTo(Category);
 
-Product.belongsTo(SaleBanner);
-SaleBanner.hasMany(Product);
+Product.hasMany(SaleBanner);
+SaleBanner.belongsTo(Product);
 
 module.exports = {
 	...sequelize.models,

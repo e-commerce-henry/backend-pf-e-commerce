@@ -1,7 +1,18 @@
-const router = require("express").Router();
+const {Router} = require('express');
+const router = Router();
 
-const postUserRouter = require("./postUser");
 
-router.use("/createUser", postUserRouter);
+const ProductsRoutes = require('./products');
+const CategoryRoutes = require('./categories');
+const SaleBannerRoutes = require('./saleBanner');
+
+router.use('/products',ProductsRoutes);
+router.use('/category', CategoryRoutes );
+router.use('/saleBanner', SaleBannerRoutes)
+
+
+
+
+
 
 module.exports = router;
