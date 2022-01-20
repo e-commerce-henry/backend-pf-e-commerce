@@ -1,18 +1,14 @@
-const {Router} = require('express');
+const { Router } = require("express");
 const router = Router();
 
+const ProductsRoutes = require("./products");
+const CategoryRoutes = require("./categories");
+const SaleBannerRoutes = require("./saleBanner");
+const UserRoutes = require("./users");
 
-const ProductsRoutes = require('./products');
-const CategoryRoutes = require('./categories');
-const SaleBannerRoutes = require('./saleBanner');
-
-router.use('/products',ProductsRoutes);
-router.use('/category', CategoryRoutes );
-router.use('/saleBanner', SaleBannerRoutes)
-
-
-
-
-
+router.use("/products", ProductsRoutes);
+router.use("/category", CategoryRoutes);
+router.use("/saleBanner", SaleBannerRoutes);
+router.use("/users", UserRoutes);
 
 module.exports = router;
