@@ -1,12 +1,12 @@
 const { Product } = require('../../db.js');
 
-const DeleteProduct = async (req, res, next) =>{
+const deleteProducts = async (req, res, next) =>{
     try {
         const {id} = req.params;
         const prod = await Product.findByPk(id);
         if (!prod) {
             res.status(404).json({
-                message:"producto eliminado con id" + id
+                message:"no existe producto con id " + id
             })
         };
         await prod.destroy()// eliminacion fisica;
@@ -21,5 +21,5 @@ const DeleteProduct = async (req, res, next) =>{
 }
 
 module.exports={
-    DeleteProduct
+    deleteProducts
 }
