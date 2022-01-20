@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const passport = require("passport");
 const flash = require("express-flash");
-const routes = require("./routes/index.js"); // commented until index.js from routes folder is not empty
+const routes = require("./routes/index.js");
 const initializePassport = require("../passport-config");
 
 require("./db");
@@ -44,7 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //middleware to apply all the possible routes in server
-app.use("/", routes); // commented until index.js from routes folder is not empty.
+app.use("/", routes);
 
 const ensureAuth = (req, res, next) => {
 	if (req.isAuthenticated()) {
