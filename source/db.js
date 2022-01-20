@@ -13,7 +13,6 @@ const sequelize = new Sequelize(
 	}
 );
 const basename = path.basename(__filename);
-console.log(basename);
 const modelDefiners = [];
 //se leen todos los archivos de la carpeta Models, y se agregan al arreglo ModelDefiners
 fs.readdirSync(path.join(__dirname, "/models"))
