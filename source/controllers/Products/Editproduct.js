@@ -1,17 +1,30 @@
-const { Product } = require('../../db.js');
+const { Product,Category } = require('../../db.js');
 
-const EditProduct = async (req, res, next) =>{
+const editProducts = async (req, res, next) =>{
     try {
         const { id } = req.params;
-        const {name, surname, stock, price, img, brand, description} = req.body        
+        const {name, stock, price, img, brand, description, category} = req.body   
+
+        //compruebo si existe el producto
         const prod = await Product.findByPk(id);
         if (!prod) {
             return res.status(404).json({
-                message:"No existe un Product con el id"+id
+                message:"No existe un Product con el id "+id
             })
         };
-        
-        await prod.update({name, surname, stock, price, img, brand, description});
+
+        let cat = await Category.findOne({
+            where:{
+                name:category
+            }
+        })
+        console.log('cat.name :>> ', cat.name);
+        if (!cat) {
+            res.json({message:'No existe Category'})
+        }
+
+
+        await prod.update({name, stock, price, img, brand, description, categoryId:cat.id});
 
         res.json(prod);
     } catch (error) {
@@ -20,5 +33,5 @@ const EditProduct = async (req, res, next) =>{
 }
 
 module.exports={
-    EditProduct
+    editProducts
 }
