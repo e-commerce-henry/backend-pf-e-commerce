@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Product } = require('../../db.js');
+const { Product,Category } = require('../../db.js');
 
 
 function searchName(name) {
@@ -8,7 +8,18 @@ function searchName(name) {
             name:{
                 [Op.iLike]: `%${name}%`
             }
-        }
+        },
+        attributes:{
+            exclude:["createdAt","updatedAt","categoryId"]
+        },
+        include:[
+            {
+                model:Category,
+                attributes:{
+                    exclude:["createdAt","updatedAt"]
+                }
+            }
+        ]
     })
 }
 
@@ -24,7 +35,19 @@ const getProducts = async ( req, res, next ) => {
                 res.json(BDname)
             }
         } else {
-            let produc = await Product.findAll();
+            let produc = await Product.findAll({
+                attributes:{
+                    exclude:["createdAt","updatedAt","categoryId"]
+                },
+                include:[
+                    {
+                        model:Category,
+                        attributes:{
+                            exclude:["createdAt","updatedAt"]
+                        }
+                    }
+                ]
+            });
 
                 if (produc.length ===0) {
                     res.json({message:"no hay products"})
