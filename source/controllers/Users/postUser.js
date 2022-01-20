@@ -20,6 +20,7 @@ const createUser = async (req, res) => {
 		});
 		console.log(hashedPwd);
 		await newUser.createUserLoginDetail({ password: hashedPwd });
+		await newUser.createWishlist({ name: `Wishlist de ${name}` });
 		res.status(201).send("New User created");
 	} catch (err) {
 		console.log(err);
