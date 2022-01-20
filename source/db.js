@@ -68,8 +68,8 @@ OrderDetail.belongsTo(Order);
 OrderDetail.belongsTo(Product);
 Product.hasMany(OrderDetail);
 
-User.hasOne(UserLoginDetail);
-UserLoginDetail.belongsTo(User);
+User.hasOne(UserLoginDetail, { onDelete: "CASCADE" });
+UserLoginDetail.belongsTo(User, { onDelete: "CASCADE" });
 
 User.hasMany(ClientAddress);
 ClientAddress.belongsTo(User);

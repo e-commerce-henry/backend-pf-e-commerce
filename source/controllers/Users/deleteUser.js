@@ -1,10 +1,13 @@
-const { User } = require("../../db");
+const { User, UserLoginDetail } = require("../../db");
 
 const deleteUser = async (req, res) => {
-	const { email } = req.body;
+	const { id } = req.params;
 	try {
-		const user = await User.findOne({ where: { email: email } });
-		console.log(user);
+		const user = await User.findOne({
+			where: { id: id },
+			include: { model: UserLoginDetail },
+		});
+
 		await user.destroy();
 		res.status(200).send("The user was deleted");
 	} catch (err) {
