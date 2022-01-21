@@ -3,27 +3,37 @@ const { Wishlist, WishlistItem } = require("../../db");
 const deleteFavItem = async (req, res) => {
 	//solamente usuario logueado puede insertar items en wishlist
 	const { productId, userId } = req.body; //puede q venga de otro lado
-
-	try {
-		//busco la wishlist que le pertenece al usuario
-		const userWishlist = await Wishlist.findOne({ where: { userId: userId } });
-		//chequeo si el producto esta o no en la lista
-		const WishlistItemCheck = await WishlistItem.findOne({
-			where: {
-				productId: productId,
-				wishlistId: userWishlist.id,
-			},
-		});
-		if (!WishlistItemCheck) {
-			res.send("El producto no se puede borrar porque no esta en tu wishlist");
-		} else {
-			await WishlistItemCheck.destroy();
-			res
-				.status(201)
-				.send("El producto fue eliminado de tu wishlist exitosamente");
+	if (!productId || !userId) {
+		res
+			.status(400)
+			.send("Imposible borrar item de la wishlist sin productId, userId");
+	} else {
+		try {
+			//busco la wishlist que le pertenece al usuario
+			const userWishlist = await Wishlist.findOne({
+				where: { userId: userId },
+				include: {
+					model: WishlistItem,
+					required: false,
+					where: { productId: productId },
+				},
+			});
+			//chequeo que tenga productos en wishlist
+			console.log(userWishlist);
+			if (userWishlist.wishlistItems.length === 0) {
+				res.send(
+					"El producto no se puede borrar porque no esta en tu wishlist"
+				);
+			} else {
+				const productToDelete = userWishlist.wishlistItems[0];
+				await productToDelete.destroy();
+				res
+					.status(201)
+					.send("El producto fue eliminado de tu wishlist exitosamente");
+			}
+		} catch (err) {
+			res.status(500).send(err);
 		}
-	} catch (err) {
-		res.status(500).send(err);
 	}
 };
 
