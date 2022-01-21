@@ -17,7 +17,7 @@ initializePassport(passport);
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
-app.use(morgan("dev"));
+app.use(morgan("dev")); 
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*"); // Front-End all url "*"
 	res.header("Access-Control-Allow-Credentials", "true");
