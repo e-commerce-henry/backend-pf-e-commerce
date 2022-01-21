@@ -19,8 +19,12 @@ const createUser = async (req, res) => {
 			email: email,
 		});
 		console.log(hashedPwd);
+		//guarda la password en modelo UserLoginDetail
 		await newUser.createUserLoginDetail({ password: hashedPwd });
+		//genera una wishlist por cada usuario que se cree
 		await newUser.createWishlist({ name: `Wishlist de ${name}` });
+		//genera un carrito de compra por cada usuario que se cree
+		await newUser.createCart({ name: `Carrito de ${name}` });
 		res.status(201).send("New User created");
 	} catch (err) {
 		console.log(err);
