@@ -18,7 +18,7 @@ const deleteFavItem = async (req, res) => {
 					where: { productId: productId },
 				},
 			});
-
+			//chequeo que tenga productos en wishlist
 			console.log(userWishlist);
 			if (userWishlist.wishlistItems.length === 0) {
 				res.send(
