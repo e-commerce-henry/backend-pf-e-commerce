@@ -2,26 +2,32 @@ const { Cart, CartItem } = require("../../db");
 
 const deleteCartItem = async (req, res) => {
 	const { productId, userId } = req.body; //puede venir de otro lado
+	if (!productId || !userId) {
+		res
+			.status(400)
+			.send("No se puede borrar item sin saber el productId y userId");
+	} else {
+		try {
+			const userCart = await Cart.findOne({
+				where: { userId: userId },
+				include: {
+					model: CartItem,
+					where: {
+						productId: productId,
+					},
+				},
+			});
 
-	try {
-		const userCart = await Cart.findOne({
-			where: { userId: userId },
-		});
-
-		const cartItemCheck = await CartItem.findOne({
-			where: {
-				productId: productId,
-				cartId: userCart.id,
-			},
-		});
-		if (!cartItemCheck) {
-			res.status(404).send("El producto no se encuentra en el carrito");
-		} else {
-			await cartItemCheck.destroy();
-			res.status(200).send("El producto fue borrado del carrito");
+			if (!userCart) {
+				res.status(404).send("El producto no se encuentra en el carrito");
+			} else {
+				const productToDelete = userCart.cartItems[0];
+				await productToDelete.destroy();
+				res.status(200).send("El producto fue borrado del carrito");
+			}
+		} catch (err) {
+			res.status(500).send(err);
 		}
-	} catch (err) {
-		res.status(500).send(err);
 	}
 };
 
