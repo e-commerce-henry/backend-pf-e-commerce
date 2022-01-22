@@ -53,10 +53,10 @@ const {
 
 //relaciones entre tablas
 
-User.hasOne(Cart);
-Cart.belongsTo(User);
-Cart.hasMany(CartItem);
-CartItem.belongsTo(Cart);
+User.hasOne(Cart, { onDelete: "CASCADE" });
+Cart.belongsTo(User, { onDelete: "CASCADE" });
+Cart.hasMany(CartItem, { onDelete: "CASCADE" });
+CartItem.belongsTo(Cart, { onDelete: "CASCADE" });
 CartItem.belongsTo(Product);
 Product.hasMany(CartItem);
 
@@ -70,13 +70,13 @@ Product.hasMany(OrderDetail);
 User.hasOne(UserLoginDetail, { onDelete: "CASCADE" });
 UserLoginDetail.belongsTo(User, { onDelete: "CASCADE" });
 
-User.hasMany(ClientAddress);
-ClientAddress.belongsTo(User);
+User.hasOne(ClientAddress, { onDelete: "CASCADE" });
+ClientAddress.belongsTo(User, { onDelete: "CASCADE" });
 
-User.hasOne(Wishlist);
-Wishlist.belongsTo(User);
-Wishlist.hasMany(WishlistItem);
-WishlistItem.belongsTo(Wishlist);
+User.hasOne(Wishlist, { onDelete: "CASCADE" });
+Wishlist.belongsTo(User, { onDelete: "CASCADE" });
+Wishlist.hasMany(WishlistItem, { onDelete: "CASCADE" });
+WishlistItem.belongsTo(Wishlist, { onDelete: "CASCADE" });
 Product.hasMany(WishlistItem);
 WishlistItem.belongsTo(Product);
 

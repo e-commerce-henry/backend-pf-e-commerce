@@ -1,11 +1,22 @@
-const { User, UserLoginDetail } = require("../../db");
+const {
+	User,
+	UserLoginDetail,
+	ClientAddress,
+	Wishlist,
+	Cart,
+} = require("../../db");
 
 const deleteUser = async (req, res) => {
 	const { id } = req.params;
 	try {
 		const user = await User.findOne({
 			where: { id: id },
-			include: { model: UserLoginDetail },
+			include: [
+				{ model: UserLoginDetail },
+				{ model: ClientAddress },
+				{ model: Wishlist },
+				{ model: Cart },
+			],
 		});
 
 		await user.destroy();
