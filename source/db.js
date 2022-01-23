@@ -70,7 +70,7 @@ Product.hasMany(OrderDetail);
 User.hasOne(UserLoginDetail, { onDelete: "CASCADE" });
 UserLoginDetail.belongsTo(User, { onDelete: "CASCADE" });
 
-User.hasOne(ClientAddress, { onDelete: "CASCADE" });
+User.hasMany(ClientAddress, { onDelete: "CASCADE" });
 ClientAddress.belongsTo(User, { onDelete: "CASCADE" });
 
 User.hasOne(Wishlist, { onDelete: "CASCADE" });
