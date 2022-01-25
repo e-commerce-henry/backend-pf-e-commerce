@@ -34,9 +34,10 @@ const createUser = async (req, res) => {
 	try {
 		const hashedPwd = await bcrypt.hash(pwd, 12); //second param is number of SaltRounds to hash;
 		const newUser = await User.create({
-			name: name,
-			surname: surname,
-			email: email,
+			name,
+			surname,
+			email,
+			role,
 		});
 		//guarda la password en modelo UserLoginDetail
 		await newUser.createUserLoginDetail({ password: hashedPwd });
