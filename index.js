@@ -6,7 +6,7 @@ const {
 	preChargeProduct,
 } = require("./source/controllers/Products/PreCharge");
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
 	app.listen(3001, async () => {
 		await preChargeCategories(),
 			await preChargeProduct(),

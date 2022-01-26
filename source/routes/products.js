@@ -10,8 +10,8 @@ const { requireAuth } = require("../middleware/authMiddleware");
 
 router.get("/", getProducts);
 router.get("/:id", getProductById);
-router.post("/", requireAuth, postProducts);
-router.put("/:id", requireAuth, editProducts);
-router.delete("/:id", requireAuth, deleteProducts);
+router.post("/", (requireAuth, postProducts));
+router.put("/:id",(requireAuth, editProducts));
+router.delete("/:id",(requireAuth, deleteProducts));
 
 module.exports = router;
