@@ -9,7 +9,10 @@ require("./db");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+	credentials: true,
+	origin: ['http://localhost:4000'] 
+ }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
@@ -24,6 +27,8 @@ app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
 	next();
 });
+
+
 
 //Authentication method missing  - possible passport.js implementation
 
