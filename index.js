@@ -6,7 +6,7 @@ const {
 	preChargeProduct,
 } = require("./source/controllers/Products/PreCharge");
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
 	app.listen(3001, async () => {
 		await preChargeCategories(), await preChargeProduct();
 		console.log("server listening on port 3001");

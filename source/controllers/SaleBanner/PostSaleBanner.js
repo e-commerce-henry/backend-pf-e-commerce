@@ -2,7 +2,7 @@ const {SaleBanner} = require('../../db.js');
 
 const postSaleBanner = async(req, res, next) =>{
     try {
-    const {discount} = req.body
+    const {discount,product} = req.body
         let [newSaleBanner, created] = await SaleBanner.findOrCreate({
             where:{discount}
         })
