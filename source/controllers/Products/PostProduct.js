@@ -24,6 +24,7 @@ const postProducts = async ( req, res, next ) => {
                     categoryId: cat.id
                 }
             })
+            console.log('newProduc :>> ', newProduc);
             res.status(200).json({created:created, newProduc});
         } catch (error) {
             next(error)
