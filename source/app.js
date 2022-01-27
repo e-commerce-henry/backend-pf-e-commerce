@@ -21,7 +21,6 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use((req, res, next) => {
 	const corsWhitelist = ["http://localhost:3000", "http://localhost:4000", "https://admin-pf-e-commerce.herokuapp.com/", "https://cliente-pf-e-commerce.herokuapp.com/"];
-	console.log(req.headers.origin)
 	if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
 		res.header("Access-Control-Allow-Origin", req.headers.origin); // Front-End all url "*"
 		res.header("Access-Control-Allow-Credentials", "true");

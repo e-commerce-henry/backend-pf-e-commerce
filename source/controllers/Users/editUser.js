@@ -2,22 +2,54 @@ const { User, UserLoginDetail, ClientAddress } = require("../../db");
 const bcrypt = require("bcrypt");
 
 const editUser = async (req, res) => {
-	const { name, surname, email, pwd, address, cp, city, province, floor } =
-		req.body;
+	const {
+		name,
+		surname,
+		email,
+		pwd,
+		role,
+		address,
+		postalCode,
+		city,
+		province,
+		addressId,
+		floor,
+	} = req.body;
 	const { id } = req.params;
-	if (!name || !surname || !email)
+	if (
+		!name ||
+		!surname ||
+		!email ||
+		!addressId ||
+		!postalCode ||
+		!city ||
+		!province
+	)
 		return res.status(400).send("All fields are required");
 	try {
 		const user = await User.findOne({
 			where: { id: id },
-			include: [{ model: UserLoginDetail }],
+			include: [
+				{ model: UserLoginDetail },
+				{ model: ClientAddress, where: { id: addressId } },
+			],
 		});
+		console.log(role);
+		console.log(user);
 		await user.update({
-			name: name,
-			surname: surname,
-			email: email,
+			name,
+			surname,
+			email,
+			role: role || "user",
 		});
 		user.save();
+		await user.clientAddresses[0].update({
+			address,
+			city,
+			province,
+			postalCode,
+			floor,
+		});
 		if (pwd) {
 			const pwdChangeCheck = await bcrypt.compare(
 				pwd,
