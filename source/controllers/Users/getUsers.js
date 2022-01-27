@@ -1,8 +1,12 @@
-const { User } = require("../../db");
+const { User, ClientAddress } = require("../../db");
 
 const getAllUsers = async (req, res) => {
 	try {
-		const users = await User.findAll();
+		const users = await User.findAll({
+			include: { model: ClientAddress },
+			attributes: { exclude: ["createdAt", "updatedAt"] },
+		});
+		console.log(users);
 		if (users.length === 0) {
 			return res.status(400).send("No hay usuarios guardados");
 		}
