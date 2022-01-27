@@ -53,7 +53,7 @@ const createUser = async (req, res) => {
 			province: province,
 			floor: floor,
 		});
-		res.status(201).send("New User created");
+		res.status(201).send({ message: "New User created", newUser });
 	} catch (err) {
 		console.log(err);
 		res.status(500).send(err); // server error
