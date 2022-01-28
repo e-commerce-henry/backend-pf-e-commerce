@@ -15,11 +15,16 @@ app.use(
 	})
 );
 
+app.use(cors({
+	credentials: true,
+	origin: ['http://localhost:4000', 'http://localhost:3000', 'https://cliente-pf-e-commerce.herokuapp.com/', 'https://admin-pf-e-commerce.herokuapp.com/'] 
+ }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use((req, res, next) => {
+
 	const corsWhitelist = ["http://localhost:3000", "http://localhost:4000", "https://admin-pf-e-commerce.herokuapp.com/", "https://cliente-pf-e-commerce.herokuapp.com/"];
 	if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
 		res.header("Access-Control-Allow-Origin", req.headers.origin); // Front-End all url "*"

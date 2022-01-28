@@ -1,7 +1,8 @@
 const { Cart, CartItem } = require("../../db");
 
 const getCartItems = async (req, res) => {
-	const { userId } = req.body; //puede venir de otro lado
+	const { userId } = req.params; //puede venir de otro lado
+	console.log(userId)
 	if (!userId) {
 		res.status(400).send("Imposible obtener carrito sin userId");
 	} else {
