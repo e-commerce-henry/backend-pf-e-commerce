@@ -31,6 +31,9 @@ const signIn = async (req, res) => {
 									expiresIn: maxAge,
 							  }); // if user, expires in 24h
 					res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+					res.cookie("jwt-Logged", process.env.CLIENT_SIDE_AUTH_COOKIE, {
+						maxAge: maxAge * 1000,
+					});
 					res.status(200).send({ user: foundUser.id });
 				} else {
 					return res
