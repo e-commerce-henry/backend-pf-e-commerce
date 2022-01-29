@@ -5,7 +5,10 @@ const getFavItem = require("../controllers/Wishlist/getFavItem");
 const { requireAuth } = require("../middleware/authMiddleware");
 
 router.post("/", postFavItem);
+
 router.delete("/", deleteFavItem);
+
+
 router.get("/:userId", getFavItem);
 
 module.exports = router;
