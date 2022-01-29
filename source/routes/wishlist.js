@@ -4,8 +4,8 @@ const deleteFavItem = require("../controllers/Wishlist/deleteFavItem");
 const getFavItem = require("../controllers/Wishlist/getFavItem");
 const { requireAuth } = require("../middleware/authMiddleware");
 
-router.post("/", requireAuth, postFavItem);
+router.post("/", postFavItem);
 router.delete("/", requireAuth, deleteFavItem);
-router.get("/", requireAuth, getFavItem);
+router.get("/:userId", getFavItem);
 
 module.exports = router;
