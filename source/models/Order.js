@@ -19,8 +19,14 @@ module.exports = (sequelize) => {
 			type: DataTypes.FLOAT,
 			allowNull: false,
 		},
-		shippingaddress: {
+		shippingAddress: {
 			type: DataTypes.STRING,
+			allowNull: false,
+		},
+
+		shippingStatus: {
+			type: DataTypes.ENUM("not sent", "sent"),
+			defaultValue: "not sent",
 			allowNull: false,
 		},
 	});

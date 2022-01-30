@@ -13,7 +13,7 @@ const createOrder = async (req, res) => {
 			userId,
 			date: new Date(),
 			total,
-			shippingaddress: addressId,
+			shippingAddress: addressId,
 		});
 		const promises = products.map(async (e) => {
 			return await OrderDetail.create({
