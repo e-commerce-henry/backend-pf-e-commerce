@@ -8,7 +8,6 @@ const createOrder = async (req, res) => {
 		return res.status(400).send("Se requieren mas datos");
 	}
 	try {
-		console.log("entra");
 		const user = await User.findByPk(userId);
 		const newOrder = await user.createOrder({
 			userId,
@@ -16,7 +15,6 @@ const createOrder = async (req, res) => {
 			total,
 			shippingaddress: addressId,
 		});
-		console.log(newOrder);
 		const promises = products.map(async (e) => {
 			return await OrderDetail.create({
 				orderId: newOrder.id,
@@ -27,7 +25,6 @@ const createOrder = async (req, res) => {
 		});
 
 		const result = await Promise.all(promises);
-		console.log(result);
 		if (!result || result.length === 0) {
 			res.status(400).send("Error al generar la orden de compra");
 		} else {
