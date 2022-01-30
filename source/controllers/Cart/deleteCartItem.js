@@ -1,6 +1,7 @@
 const { Cart, CartItem } = require("../../db");
 
 const deleteCartItem = async (req, res) => {
+	console.log(req.body)
 	const { productId, userId } = req.body; //puede venir de otro lado
 	if (!productId || !userId) {
 		res
