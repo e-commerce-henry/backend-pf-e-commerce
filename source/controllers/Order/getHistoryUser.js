@@ -3,11 +3,11 @@ const { Op } = require('sequelize');
 
 const getHistoryById = async (req, res) => {
 
-	let { idUser } = req.params;
+	let {userId } = req.params;
 
 	try{
 		await User.findOne({
-			where: { id: { [Op.iLike]: idUser } },
+			where: { id: { [Op.iLike]: userId } },
 			
 			include: [{
 				model: Order,
