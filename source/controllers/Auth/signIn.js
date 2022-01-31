@@ -35,13 +35,17 @@ const signIn = async (req, res) => {
 						sameSite: "none",
 						secure: true,
 						maxAge: maxAge * 1000,
-						domain: "herokuapp.com",
+
+						domain: "admin-pf-e-commerce.herokuapp.com",
+
 					});
 					res.cookie("jwt-Logged", process.env.CLIENT_SIDE_AUTH_COOKIE, {
 						maxAge: maxAge * 1000,
 						sameSite: "none",
 						secure: true,
-						domain: "herokuapp.com",
+
+						domain: "admin-pf-e-commerce.herokuapp.com",
+
 					});
 					res.status(200).send({ user: foundUser.id });
 				} else {
