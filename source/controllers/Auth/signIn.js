@@ -35,13 +35,13 @@ const signIn = async (req, res) => {
 						sameSite: "none",
 						secure: true,
 						maxAge: maxAge * 1000,
-						domain: "admin-pf-e-commerce.herokuapp.com",
+						domain: "boring-dubinsky-207e29.netlify.app",
 					});
 					res.cookie("jwt-Logged", process.env.CLIENT_SIDE_AUTH_COOKIE, {
 						maxAge: maxAge * 1000,
 						sameSite: "none",
 						secure: true,
-						domain: "admin-pf-e-commerce.herokuapp.com",
+						domain: "boring-dubinsky-207e29.netlify.app",
 					});
 					res.status(200).send({ user: foundUser.id });
 				} else {
