@@ -6,7 +6,7 @@ const routes = require("./routes/index.js");
 const cors = require("cors");
 
 require("./db");
-
+const app = express();
 app.use(
 	cors({
 		credentials: true,
