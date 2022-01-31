@@ -30,7 +30,12 @@ const signIn = async (req, res) => {
 							: jwt.sign({ id: foundUser.id }, process.env.ACCESS_SECRET, {
 									expiresIn: maxAge,
 							  }); // if user, expires in 24h
-					res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+					res.cookie("jwt", token, {
+						httpOnly: true,
+						sameSite: "none",
+						secure: true,
+						maxAge: maxAge * 1000,
+					});
 					res.cookie("jwt-Logged", process.env.CLIENT_SIDE_AUTH_COOKIE, {
 						maxAge: maxAge * 1000,
 					});
