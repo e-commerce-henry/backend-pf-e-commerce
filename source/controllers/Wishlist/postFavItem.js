@@ -2,6 +2,7 @@ const { Wishlist, WishlistItem } = require("../../db");
 
 const addFavItem = async (req, res) => {
 	//solamente usuario logueado puede insertar items en wishlist
+	console.log(req.body)
 	const { productId, userId, price } = req.body; //puede q venga de otro lado
 
 	try {

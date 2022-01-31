@@ -52,7 +52,7 @@ const getProducts = async ( req, res, next ) => {
                 if (produc.length ===0) {
                     res.json({message:"no hay products"})
                 } else {
-                    res.json(produc)
+                    res.json(produc.sort((a,b)=>b.id - a.id))
                 }
         }
 

@@ -8,14 +8,25 @@ module.exports = (sequelize) => {
 		// -completada (el usuario efectuo la compra)
 		status: {
 			type: DataTypes.ENUM("processing", "cancelled", "completed"),
+			defaultValue: "processing",
 			allowNull: false,
 		},
 		date: {
 			type: DataTypes.DATE,
 			allowNull: false,
 		},
-		shippingaddress: {
+		total: {
+			type: DataTypes.FLOAT,
+			allowNull: false,
+		},
+		shippingAddress: {
 			type: DataTypes.STRING,
+			allowNull: false,
+		},
+
+		shippingStatus: {
+			type: DataTypes.ENUM("not sent", "sent"),
+			defaultValue: "not sent",
 			allowNull: false,
 		},
 	});

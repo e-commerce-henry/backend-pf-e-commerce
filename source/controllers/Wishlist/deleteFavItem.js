@@ -2,7 +2,9 @@ const { Wishlist, WishlistItem } = require("../../db");
 
 const deleteFavItem = async (req, res) => {
 	//solamente usuario logueado puede insertar items en wishlist
+	console.log(req.body);
 	const { productId, userId } = req.body; //puede q venga de otro lado
+
 	if (!productId || !userId) {
 		res
 			.status(400)
@@ -10,6 +12,7 @@ const deleteFavItem = async (req, res) => {
 	} else {
 		try {
 			//busco la wishlist que le pertenece al usuario
+			console.log("holaaaaaaaaaa");
 			const userWishlist = await Wishlist.findOne({
 				where: { userId: userId },
 				include: {
