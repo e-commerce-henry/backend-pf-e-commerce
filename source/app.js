@@ -7,23 +7,15 @@ const cors = require("cors");
 
 require("./db");
 
-const app = express();
-app.use(
-	cors({
-		credentials: true,
-		origin: true,
-	})
-);
-
 app.use(
 	cors({
 		credentials: true,
 		origin: [
 			"http://localhost:4000",
 			"http://localhost:3000",
-			"https://cliente-pf-e-commerce.herokuapp.com/",
-			"https://admin-pf-e-commerce.herokuapp.com/",
-			"https://boring-dubinsky-207e29.netlify.app/",
+			"https://cliente-pf-e-commerce.herokuapp.com",
+			"https://admin-pf-e-commerce.herokuapp.com",
+			"https://boring-dubinsky-207e29.netlify.app",
 		],
 	})
 );
@@ -35,9 +27,9 @@ app.use((req, res, next) => {
 	const corsWhitelist = [
 		"http://localhost:3000",
 		"http://localhost:4000",
-		"https://admin-pf-e-commerce.herokuapp.com/",
-		"https://cliente-pf-e-commerce.herokuapp.com/",
-		"https://boring-dubinsky-207e29.netlify.app/",
+		"https://admin-pf-e-commerce.herokuapp.com",
+		"https://cliente-pf-e-commerce.herokuapp.com",
+		"https://boring-dubinsky-207e29.netlify.app",
 	];
 	if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
 		res.header("Access-Control-Allow-Origin", req.headers.origin); // Front-End all url "*"
@@ -46,6 +38,7 @@ app.use((req, res, next) => {
 			"Access-Control-Allow-Headers",
 			"Origin, X-Requested-With, Content-Type, Accept"
 		);
+		res.header("Access-Control-Expose-Headers", "X-Powered-By");
 		res.header(
 			"Access-Control-Allow-Methods",
 			"GET, POST, OPTIONS, PUT, DELETE"
