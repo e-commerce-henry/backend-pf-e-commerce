@@ -22,14 +22,14 @@ const signIn = async (req, res) => {
 						foundUser.role === "admin"
 							? 600 //seconds - 10 min
 							: 86400; //seconds - 24h
-					const token =
-						foundUser.role === "admin"
-							? jwt.sign({ id: foundUser.id }, process.env.ACCESS_SECRET, {
-									expiresIn: maxAge,
-							  }) //if admin, expires in 10 min for more security
-							: jwt.sign({ id: foundUser.id }, process.env.ACCESS_SECRET, {
-									expiresIn: maxAge,
-							  }); // if user, expires in 24h
+					const token = jwt.sign(
+						{ id: foundUser.id },
+						process.env.ACCESS_SECRET,
+						{
+							expiresIn: maxAge,
+						}
+					);
+
 					res.cookie("jwt", token, {
 						httpOnly: true,
 						sameSite: "none",
