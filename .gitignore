@@ -108,5 +108,5 @@ dist
 package-lock.json
 
 # firebase config
-backend-pf-e-commerce\source\config\service-account.json
+source/config/service-account.json
 
