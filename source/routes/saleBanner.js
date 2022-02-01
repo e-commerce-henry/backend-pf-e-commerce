@@ -6,9 +6,10 @@ const { postSaleBanner } = require("../controllers/SaleBanner/PostSaleBanner");
 const {
 	deleteSaleBanner,
 } = require("../controllers/SaleBanner/DeleteSaleBanner");
+const { requireAuth } = require("../middleware/authMiddleware");
 
 route.get("/", getSaleBanner);
-route.post("/", postSaleBanner);
+route.post("/", requireAuth, postSaleBanner);
 route.delete("/:id", deleteSaleBanner);
 
 module.exports = route;
