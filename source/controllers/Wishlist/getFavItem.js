@@ -20,11 +20,11 @@ const getFavItem = async (req, res) => {
 		});
 		console.log(userWishlist);
 		//chequeo  si la lista esta vacia
-		if (userWishlist[0].wishlistItems.length === 0) {
-			res.status(404).send("La wishlist del usuario esta vacia");
-		} else {
+		// if (userWishlist[0].wishlistItems.length === 0) {
+		// 	res.status(404).send("La wishlist del usuario esta vacia");
+		// } else {
 			res.status(200).send(userWishlist);
-		}
+		//}
 	} catch (err) {
 		res.status(500).send(err);
 	}
