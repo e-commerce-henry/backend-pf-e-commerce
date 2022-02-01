@@ -18,11 +18,11 @@ const getCartItems = async (req, res) => {
 					},
 				},
 			});
-			if (userCart[0].cartItems.length === 0) {
-				res.status(404).send("El carrito esta vacio");
-			} else {
-				res.status(200).send(userCart);
-			}
+			// if (userCart[0].cartItems.length === 0) {
+			// 	res.status(404).send("El carrito esta vacio");
+			// } else {
+			 	res.status(200).send(userCart);
+			//}
 		} catch (err) {
 			res.status(500).send(err);
 		}
