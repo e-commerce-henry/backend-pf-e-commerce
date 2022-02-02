@@ -10,6 +10,6 @@ router.post("/", [requireAuth, isAdmin], postUser);
 router.delete("/:id", [requireAuth, isAdmin], deleteUser);
 router.put("/:id", requireAuth, editUser);
 router.get("/", [requireAuth, isAdmin], getAllUsers); // should be protected
-router.get("/:id", getUserById);
+router.get("/:id", getUserById); // algiuen usa esto?
 
 module.exports = router;

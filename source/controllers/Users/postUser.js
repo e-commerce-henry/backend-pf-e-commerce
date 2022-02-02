@@ -57,7 +57,6 @@ const createUser = async (req, res) => {
 			where: { email },
 			include: { model: ClientAddress },
 		});
-		console.log(finalNewUser);
 		res.status(201).send({ message: "New User created", finalNewUser });
 	} catch (err) {
 		console.log(err);
