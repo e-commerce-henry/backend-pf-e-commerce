@@ -1,14 +1,17 @@
-const jwt = require("jsonwebtoken");
 const { User } = require("../db");
+const admin = require("../config/firebase-config");
+const jwt = require("jsonwebtoken");
 
-const requireAuth = (req, res, next) => {
-	const token = req.cookies.jwt;
+const requireAuth = async (req, res, next) => {
+	const token = req.headers.authorization;
+
+	console.log("token", token);
 
 	if (token) {
 		jwt.verify(token, process.env.ACCESS_SECRET, (err, decodedToken) => {
 			if (err) {
 				console.log(err);
-				res.status(400).send("invalid token");
+				return res.status(400).send({ msg: "invalid token" });
 				// res.redirect("/signIn"); //invalid token
 			} else {
 				console.log(decodedToken);

@@ -60,7 +60,12 @@ const signUp = async (req, res) => {
 			const token = jwt.sign({ id: newUser.id }, process.env.ACCESS_SECRET, {
 				expiresIn: 3600, // 1 hour
 			});
-			res.cookie("jwt", token, { httpOnly: true, maxAge: 3600 * 1000 });
+			res.cookie("jwt", token, {
+				httpOnly: true,
+				sameSite: "none",
+				secure: true,
+				maxAge: 3600 * 1000,
+			});
 			res.status(201).send({ user: newUser.id });
 		}
 	} catch (err) {
