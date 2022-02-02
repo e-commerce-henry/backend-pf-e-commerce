@@ -20,7 +20,7 @@ const signIn = async (req, res) => {
 				if (isMatch) {
 					const maxAge =
 						foundUser.role === "admin"
-							? 600 //seconds - 10 min
+							? 18000 //seconds - 10 min
 							: 86400; //seconds - 24h
 					const token = jwt.sign(
 						{ id: foundUser.id },

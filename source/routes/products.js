@@ -11,7 +11,7 @@ const { requireAuth, isAdmin } = require("../middleware/authMiddleware");
 router.get("/", getProducts);
 router.get("/:id", getProductById);
 router.post("/", [requireAuth, isAdmin], postProducts);
-router.put("/:id", editProducts);
+router.put("/:id", [requireAuth, isAdmin], editProducts);
 router.delete("/:id", deleteProducts);
 
 module.exports = router;
