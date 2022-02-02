@@ -1,4 +1,5 @@
 const { User, OrderDetail } = require("../../db");
+import mercadopagocontrolador from "../../mercadopago/mercadopago_sendorder";
 
 const createOrder = async (req, res) => {
 	const { addressId, total, products } = req.body; //products debe ser un array de objetos con las siguientes propiedades: quantity, price, productId
@@ -8,6 +9,7 @@ const createOrder = async (req, res) => {
 		return res.status(400).send("Se requieren mas datos");
 	}
 	try {
+
 		const user = await User.findByPk(userId);
 		const newOrder = await user.createOrder({
 			userId,
@@ -28,6 +30,8 @@ const createOrder = async (req, res) => {
 		if (!result || result.length === 0) {
 			res.status(400).send("Error al generar la orden de compra");
 		} else {
+			let Mercadopago= new mercadopagocontrolador()
+			Mercadopago()
 			res.status(200).send({ message: "Orden ejecutada", result });
 		}
 	} catch (error) {
