@@ -43,7 +43,8 @@ const signIn = async (req, res) => {
 					// 	secure: true,
 
 					// });
-					res.status(200).send({ user: foundUser.id, token });
+					console.log(token);
+					res.status(200).send(token);
 				} else {
 					return res
 						.status(401)

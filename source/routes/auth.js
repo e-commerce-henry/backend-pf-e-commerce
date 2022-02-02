@@ -5,6 +5,6 @@ const logOut = require("../controllers/Auth/logOut");
 
 router.post("/signUp", signUp);
 router.post("/signIn", signIn);
-router.get("/logOut", logOut);
+// router.get("/logOut", logOut);
 
 module.exports = router;

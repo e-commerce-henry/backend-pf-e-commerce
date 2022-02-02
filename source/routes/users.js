@@ -6,10 +6,10 @@ const { requireAuth, isAdmin } = require("../middleware/authMiddleware");
 const getAllUsers = require("../controllers/Users/getUsers");
 const getUserById = require("../controllers/Users/getUserById");
 
-router.post("/", postUser);
-router.delete("/:id", deleteUser);
-router.put("/:id", editUser);
-router.get("/", getAllUsers); // should be protected
+router.post("/", [requireAuth, isAdmin], postUser);
+router.delete("/:id", [requireAuth, isAdmin], deleteUser);
+router.put("/:id", requireAuth, editUser);
+router.get("/", [requireAuth, isAdmin], getAllUsers); // should be protected
 router.get("/:id", getUserById);
 
 module.exports = router;

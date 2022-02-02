@@ -6,11 +6,11 @@ const { postProducts } = require("../controllers/Products/PostProduct");
 const { editProducts } = require("../controllers/Products/Editproduct");
 const { deleteProducts } = require("../controllers/Products/DeleteProduct");
 const { getProductById } = require("../controllers/Products/GetProductById");
-// const { requireAuth } = require("../middleware/authMiddleware");
+const { requireAuth, isAdmin } = require("../middleware/authMiddleware");
 
 router.get("/", getProducts);
 router.get("/:id", getProductById);
-router.post("/", postProducts);
+router.post("/", [requireAuth, isAdmin], postProducts);
 router.put("/:id", editProducts);
 router.delete("/:id", deleteProducts);
 
