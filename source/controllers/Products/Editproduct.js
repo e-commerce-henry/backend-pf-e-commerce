@@ -33,8 +33,8 @@ const editProducts = async (req, res, next) => {
 			description,
 			categoryId: cat.id,
 		});
-
-		res.json(prod);
+		const newProductWithCategory = { ...prod.dataValues, category };
+		res.json(newProductWithCategory);
 	} catch (error) {
 		next(error);
 	}
