@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
 
 		email: {
 			type: DataTypes.STRING,
-			allowNull: false,
 			unique: true,
 			validate: {
 				isEmail: true,
@@ -24,7 +23,6 @@ module.exports = (sequelize) => {
 		role: {
 			type: DataTypes.ENUM("user", "admin"),
 			defaultValue: "user",
-			allowNull: false,
 		},
 	});
 };
