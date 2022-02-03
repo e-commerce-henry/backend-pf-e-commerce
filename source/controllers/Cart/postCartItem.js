@@ -2,9 +2,9 @@ const { Cart, CartItem } = require("../../db");
 
 const addCartItem = async (req, res) => {
 	//solamente usuario logueado puede insertar items en cart
-	const { productId, userId, price } = req.body; //puede q venga de otro lado
+	const { productId, userId, price, img, name } = req.body; //puede q venga de otro lado
 	//el precio puede venir desde el front o puedo realizar busqueda en DB para traer precio con el productID
-	if (!productId || !userId || !price) {
+	if (!productId || !userId || !price || !img || !name) {
 		res
 			.status(400)
 			.send(
@@ -32,6 +32,8 @@ const addCartItem = async (req, res) => {
 					productId: productId,
 					price: price,
 					quantity: 1, //por default al agregar, se agrega 1. Luego en ruta editar carrito se adicionan mas en caso que el usuario asi lo requiera
+					img,
+					name,
 				});
 				res
 					.status(201)
