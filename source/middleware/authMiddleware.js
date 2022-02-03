@@ -1,23 +1,23 @@
 const { User } = require("../db");
-const admin = require("../config/firebase-config");
+const jwt = require("jsonwebtoken");
 
 const requireAuth = async (req, res, next) => {
-	const token = req.headers.authorization.split(" ")[1];
-	console.log("token", token);
-	const decodedToken = await admin.auth().verifyIdToken(token);
-	if (decodedToken) {
-		return next();
+	const token = req.headers.authorization;
 
-		// jwt.verify(token, process.env.ACCESS_SECRET, (err, decodedToken) => {
-		// 	if (err) {
-		// 		console.log(err);
-		// 		res.status(400).send("invalid token");
-		// 		// res.redirect("/signIn"); //invalid token
-		// 	} else {
-		// 		console.log(decodedToken);
-		// 		req.userId = decodedToken.id;
-		// 		next();
-		// 	}
+	console.log("token", token);
+
+	if (token) {
+		jwt.verify(token, process.env.ACCESS_SECRET, (err, decodedToken) => {
+			if (err) {
+				console.log(err);
+				return res.status(400).send({ msg: "invalid token" });
+				// res.redirect("/signIn"); //invalid token
+			} else {
+				console.log(decodedToken);
+				req.userId = decodedToken.id;
+				next();
+			}
+		});
 	} else {
 		res.status(400).send("Not authorized. Please log in");
 		// res.redirect("/signIn");

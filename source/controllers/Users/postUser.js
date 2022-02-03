@@ -1,4 +1,4 @@
-const { User } = require("../../db");
+const { User, ClientAddress } = require("../../db");
 const bcrypt = require("bcrypt");
 
 const createUser = async (req, res) => {
@@ -53,7 +53,11 @@ const createUser = async (req, res) => {
 			province: province,
 			floor: floor,
 		});
-		res.status(201).send({ message: "New User created", newUser });
+		const finalNewUser = await User.findOne({
+			where: { email },
+			include: { model: ClientAddress },
+		});
+		res.status(201).send({ message: "New User created", finalNewUser });
 	} catch (err) {
 		console.log(err);
 		res.status(500).send(err); // server error
