@@ -3,11 +3,10 @@ const { Order, OrderDetail } = require("../../db");
 
 mercadopago.configure({
 	access_token:
-		"TEST-2740297351268044-012718-d897c3fceba48737188059496e0ec59f-237469205",
+		"TEST-8933297648893953-013013-bed41c227baa431920b536a6ff217fdd-317544645",
 });
 
 const PayMP = async (req, res) => {
-	// const { cart } = req.body;
 	const { orderId } = req.params;
 	console.log(orderId);
 	try {
@@ -16,35 +15,30 @@ const PayMP = async (req, res) => {
 				model: OrderDetail,
 			},
 		});
-
 		const items = order.orderDetails.map((e) => ({
-			title: e.title,
+			title: e.name,
 			unit_price: Number(e.price),
 			quantity: Number(e.quantity),
 			picture_url: e.img,
+			currency_id: "ARS",
 		}));
+		console.log(items);
+		let preference = {
+			items, //array con todos los productos de la orden
+			external_reference: orderId,
 
-		// let preference = {
-		// 	items: orderItems, //array con todos los productos de la orden
-		// 	external_reference: orderId,
-		// 	payment_methods: {
-		// 		excluyed_payment_types: [
-		// 			{
-		// 				id: "atm",
-		// 			},
-		// 		],
-		// 		installments: 3,
-		// 	},
-		// 	back_urls: {
-		// 	    success: `/mercadopago/pagos` || "http://localhost:3001/mercadopago/pagos",
-		// 	    failure: `/` || "http://localhost:3000/",
-		// 	    pending: `/` || "http://localhost:3000/",
-		// 	},
-		// };
-
-		// const response = await mercadopago.preferences.create(preference);
-		// const preferenceId = response.body.id;
-		res.send(orderItems);
+			// back_urls: {
+			//     success:,
+			//     failure: ,
+			//     pending: ,
+			// },
+			// auto_return: "approved", // para que retorne al usuario a la ventana cuando el pago esta aprobado
+			// binary_mode: true, // setea el resultado de pago en aprobado o desaprobado
+		};
+		console.log(preference);
+		const response = await mercadopago.preferences.create(preference);
+		const globalId = response.body.id;
+		res.send(globalId);
 	} catch (err) {
 		console.log(err);
 	}
