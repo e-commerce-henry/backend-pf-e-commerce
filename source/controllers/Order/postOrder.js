@@ -1,7 +1,7 @@
 const { User, OrderDetail } = require("../../db");
 
 const createOrder = async (req, res) => {
-	const { addressId, total, products } = req.body; //products debe ser un array de objetos con las siguientes propiedades: quantity, price, productId
+	const { addressId, total, products } = req.body; //products debe ser un array de objetos con las siguientes propiedades: quantity, price, productId, img, name
 	const { userId } = req.params;
 
 	if (!userId || !addressId || !total || !products) {
@@ -21,6 +21,8 @@ const createOrder = async (req, res) => {
 				quantity: e.quantity,
 				price: e.price,
 				productId: e.productId,
+				img: e.img,
+				name: e.name,
 			});
 		});
 
