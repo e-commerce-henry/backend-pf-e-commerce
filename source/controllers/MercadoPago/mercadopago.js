@@ -36,7 +36,6 @@ const PayMP = async (req, res) => {
 			picture_url: e.img,
 			currency_id: "ARS",
 		}));
-		console.log(items);
 		let preference = {
 			items, //array con todos los productos de la orden
 			external_reference: orderId,
@@ -61,10 +60,9 @@ const PayMP = async (req, res) => {
 			auto_return: "approved", // para que retorne al usuario a la ventana cuando el pago esta aprobado
 			binary_mode: true, // setea el resultado de pago en aprobado o desaprobado
 		};
-		console.log(preference);
 		const response = await mercadopago.preferences.create(preference);
 		const globalId = response.body.id;
-		res.send(response);
+		res.send(globalId);
 	} catch (err) {
 		console.log(err);
 	}
