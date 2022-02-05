@@ -12,8 +12,11 @@ const getInfoPay = async (req, res) => {
 		await order.update({ status: newOrderStatus });
 		console.log("orden actualizada");
 
-		// res.redirect("http://localhost:3000/realizado");
-		res.send("todo liso");
+		newOrderStatus === "completed"
+			? res.redirect("http://localhost:3000/realizado")
+			: res.redirect("http://localhost:3000/rechazada"); // crear componente y rutearlo
+
+		// res.send("todo liso");
 	} catch (err) {
 		res.status(500).send(err);
 	}
