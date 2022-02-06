@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 		"http://localhost:3000",
 		"http://localhost:4000",
 		"http://localhost:3002",
-
 		"https://admin-pf-e-commerce.herokuapp.com",
 		"https://cliente-pf-e-commerce.herokuapp.com",
 		"https://boring-dubinsky-207e29.netlify.app",

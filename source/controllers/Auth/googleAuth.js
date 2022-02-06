@@ -33,6 +33,7 @@ const googleLogin = async (req, res) => {
 			return res.status(200).send(user);
 		}
 	} catch (error) {
+		console.log(error);
 		res.status(500).send({ msg: "error al iniciar sesion", error });
 	}
 };
