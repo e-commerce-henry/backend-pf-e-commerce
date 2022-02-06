@@ -3,7 +3,7 @@ const { Order, OrderDetail, User, ClientAddress } = require("../../db");
 
 mercadopago.configure({
 	access_token:
-		"APP_USR-5440664848703987-020419-96edf5fe259cc1dbb0014b1e58b38d14-1068670488",
+		"APP_USR-8717096016242590-020619-1586316f5b80c5dab6580f0067901e04-1069754931",
 });
 
 const PayMP = async (req, res) => {

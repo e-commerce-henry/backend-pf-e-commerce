@@ -3,6 +3,7 @@ const { User, OrderDetail } = require("../../db");
 const createOrder = async (req, res) => {
 	const { addressId, total, products } = req.body; //products debe ser un array de objetos con las siguientes propiedades: quantity, price, productId, img, name
 	const { userId } = req.params;
+	console.log(products);
 
 	if (!userId || !addressId || !total || !products) {
 		return res.status(400).send("Se requieren mas datos");
