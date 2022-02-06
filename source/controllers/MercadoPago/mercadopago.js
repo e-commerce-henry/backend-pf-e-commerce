@@ -45,8 +45,8 @@ const PayMP = async (req, res) => {
 				email: user.email,
 			},
 			back_urls: {
-				success: "localhost:3001/mercadoPago/pagos",
-				failure: "localhost:3001/mercadoPago/pagos",
+				success: "http://cliente-pf-e-commerce.herokuapp.com/mercadoPago/pagos",
+				failure: "http://cliente-pf-e-commerce.herokuapp.com/mercadoPago/pagos",
 			},
 			payment_methods: {
 				excluded_payment_types: [
