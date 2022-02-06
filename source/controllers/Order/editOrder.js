@@ -1,21 +1,20 @@
 const { Order } = require("../../db");
 
 const editOrder = async (req, res) => {
-	const { userId } = req.params;
-	const { orderId, status, shippingStatus } = req.body; // si respuesta de mercado pago es positiva, se cambia el status a "completada".
-	if (!userId || !orderId || (!status && !shippingStatus)) {
+	console.log(req.body);
+	const { orderId } = req.params;
+	const { status, shippingStatus, total } = req.body; // si respuesta de mercado pago es positiva, se cambia el status a "completada".
+	if (!total || !orderId || !shippingStatus || !status) {
 		return res
 			.status(400)
-			.send("Se require userId, orderId y status o shippingStatus");
+			.send("Se require orderId, status, shippingStatus y total");
 	}
 	try {
 		const foundOrder = await Order.findByPk(orderId);
-		// hay que ver como es la respuesta de Mercado Pago.
 		const modifiedOrder = await foundOrder.update({
-			status: status ? status : foundOrder.status,
-			shippingStatus: shippingStatus
-				? shippingStatus
-				: foundOrder.shippingStatus,
+			status,
+			shippingStatus,
+			total,
 		});
 
 		res.status(200).send({ message: "orden actualizada", modifiedOrder });

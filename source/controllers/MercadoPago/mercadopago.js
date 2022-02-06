@@ -3,7 +3,7 @@ const { Order, OrderDetail, User, ClientAddress } = require("../../db");
 
 mercadopago.configure({
 	access_token:
-		"APP_USR-5440664848703987-020419-96edf5fe259cc1dbb0014b1e58b38d14-1068670488",
+		"APP_USR-8717096016242590-020619-1586316f5b80c5dab6580f0067901e04-1069754931",
 });
 
 const PayMP = async (req, res) => {
@@ -36,7 +36,6 @@ const PayMP = async (req, res) => {
 			picture_url: e.img,
 			currency_id: "ARS",
 		}));
-		console.log(items);
 		let preference = {
 			items, //array con todos los productos de la orden
 			external_reference: orderId,
@@ -61,10 +60,9 @@ const PayMP = async (req, res) => {
 			auto_return: "approved", // para que retorne al usuario a la ventana cuando el pago esta aprobado
 			binary_mode: true, // setea el resultado de pago en aprobado o desaprobado
 		};
-		console.log(preference);
 		const response = await mercadopago.preferences.create(preference);
 		const globalId = response.body.id;
-		res.send(response);
+		res.send(globalId);
 	} catch (err) {
 		console.log(err);
 	}

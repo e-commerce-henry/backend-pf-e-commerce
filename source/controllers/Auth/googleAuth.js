@@ -27,6 +27,7 @@ const googleLogin = async (req, res) => {
 			console.log(newUser);
 			await newUser.createWishlist({ name: `Wishlist de ${given_name}` });
 			await newUser.createCart({ name: `Carrito de ${given_name}` });
+			await newUser.createClientAddress({});
 
 			return res.status(201).send(newUser);
 		} else {
