@@ -10,6 +10,6 @@ router.get("/:userId", getAllOrdersByUser);
 router.get("/", [requireAuth, isAdmin], getAllOrders);
 router.get("/order/:orderId", getOrderById);
 router.post("/:userId", createOrder);
-router.put("/:userId", editOrder);
+router.put("/:orderId", editOrder);
 
 module.exports = router;
