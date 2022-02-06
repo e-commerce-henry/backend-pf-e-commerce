@@ -1,5 +1,5 @@
 const e = require("express");
-const { Order, OrderDetail, Product } = require("../../db");
+const { Order, OrderDetail, Product, Cart, CartItem } = require("../../db");
 
 const getInfoPay = async (req, res) => {
 	try {
@@ -22,7 +22,17 @@ const getInfoPay = async (req, res) => {
 					where: { id: e.productId },
 				});
 			});
-			return await Promise.all(promises);
+			await Promise.all(promises);
+
+			//reseteo el carro del usuario
+			const cart = await Cart.findOne({
+				where: { userId: order.userId },
+				include: { model: CartItem },
+			});
+			const promises2 = cart.cartItems.map(async (e) => {
+				return await e.destroy();
+			});
+			await Promise.all(promises2);
 		}
 
 		newOrderStatus === "completed"
