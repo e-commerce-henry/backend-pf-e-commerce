@@ -49,6 +49,7 @@ const {
 	Wishlist,
 	WishlistItem,
 	SaleBanner,
+	ContactForm,
 } = sequelize.models;
 
 //relaciones entre tablas
