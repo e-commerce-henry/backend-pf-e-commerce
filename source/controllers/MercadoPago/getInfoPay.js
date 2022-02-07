@@ -4,11 +4,10 @@ const { Order, OrderDetail, Product, Cart, CartItem } = require("../../db");
 const getInfoPay = async (req, res) => {
 	try {
 		const { status, external_reference } = req.query;
-
+		console.log(status);
 		const order = await Order.findByPk(external_reference, {
 			include: { model: OrderDetail },
 		});
-		console.log(order);
 		const newOrderStatus = status === "approved" ? "completed" : "cancelled";
 
 		await order.update({ status: newOrderStatus });
@@ -36,8 +35,8 @@ const getInfoPay = async (req, res) => {
 		}
 
 		newOrderStatus === "completed"
-			? res.redirect("https://cliente-pf-e-commerce.herokuapp.com/realizado")
-			: res.redirect("https://cliente-pf-e-commerce.herokuapp.com/rechazada"); // crear componente y rutearlo
+			? res.redirect("http://localhost:3000/realizado")
+			: res.redirect("http://localhost:3000/rechazada"); // crear componente y rutearlo
 	} catch (err) {
 		res.status(500).send(err);
 	}
