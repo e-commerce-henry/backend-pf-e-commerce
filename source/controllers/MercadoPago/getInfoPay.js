@@ -36,8 +36,8 @@ const getInfoPay = async (req, res) => {
 		}
 
 		newOrderStatus === "completed"
-			? res.redirect("http://cliente-pf-e-commerce.herokuapp.com/realizado")
-			: res.redirect("http://cliente-pf-e-commerce.herokuapp.com/rechazada"); // crear componente y rutearlo
+			? res.redirect("https://cliente-pf-e-commerce.herokuapp.com/realizado")
+			: res.redirect("https://cliente-pf-e-commerce.herokuapp.com/rechazada"); // crear componente y rutearlo
 	} catch (err) {
 		res.status(500).send(err);
 	}
