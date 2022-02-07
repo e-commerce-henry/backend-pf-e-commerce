@@ -14,7 +14,7 @@ const postProducts = async (req, res, next) => {
 		}
 
 		let [newProduc, created] = await Product.findOrCreate({
-			where: { name },
+			where: { name: name[0].toUpperCase() + name.slice(1) },
 			defaults: {
 				stock,
 				price,

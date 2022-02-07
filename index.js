@@ -14,6 +14,3 @@ conn.sync({ force: false }).then(() => {
 		console.log("server listening on port 3001");
 	});
 });
-
-
-

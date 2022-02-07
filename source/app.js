@@ -17,6 +17,11 @@ app.use(
 			"https://cliente-pf-e-commerce.herokuapp.com",
 			"https://admin-pf-e-commerce.herokuapp.com",
 			"https://boring-dubinsky-207e29.netlify.app",
+			"https://nifty-archimedes-2faaf7.netlify.app",
+			"http://admin-pf-e-commerce.herokuapp.com",
+			"http://cliente-pf-e-commerce.herokuapp.com",
+			"http://boring-dubinsky-207e29.netlify.app",
+			"http://nifty-archimedes-2faaf7.netlify.app",
 		],
 	})
 );
@@ -33,7 +38,11 @@ app.use((req, res, next) => {
 		"https://admin-pf-e-commerce.herokuapp.com",
 		"https://cliente-pf-e-commerce.herokuapp.com",
 		"https://boring-dubinsky-207e29.netlify.app",
-
+		"https://nifty-archimedes-2faaf7.netlify.app",
+		"http://admin-pf-e-commerce.herokuapp.com",
+		"http://cliente-pf-e-commerce.herokuapp.com",
+		"http://boring-dubinsky-207e29.netlify.app",
+		"http://nifty-archimedes-2faaf7.netlify.app",
 	];
 	if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
 		res.header("Access-Control-Allow-Origin", req.headers.origin); // Front-End all url "*"
