@@ -10,6 +10,6 @@ const { requireAuth, isAdmin } = require("../middleware/authMiddleware");
 route.get("/", getCategory);
 route.post("/", [requireAuth, isAdmin], postCategory);
 route.put("/:id", editCategory);
-route.delete("/:id", deleteCategory);
+route.delete("/:id", [requireAuth, isAdmin], deleteCategory);
 
 module.exports = route;

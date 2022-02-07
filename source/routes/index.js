@@ -12,6 +12,7 @@ const ClientAddressRoutes = require("./clientAddress");
 const AuthRoutes = require("./auth");
 const OrderRoutes = require("./order");
 const MercadoPagoRoutes = require("./mercadoPago");
+const ContactFormRoutes = require("./contactForm");
 
 router.use("/products", ProductsRoutes);
 router.use("/category", CategoryRoutes);
@@ -24,5 +25,6 @@ router.use("/productReview", ReviewRoutes);
 router.use("/clientAddress", ClientAddressRoutes);
 router.use("/orders", OrderRoutes);
 router.use("/mercadoPago", MercadoPagoRoutes);
+router.use("/contactForm", ContactFormRoutes);
 
 module.exports = router;
