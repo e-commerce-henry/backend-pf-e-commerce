@@ -31,10 +31,9 @@ app.use((req, res, next) => {
 		"http://localhost:4000",
 		"http://localhost:3002",
 
-		"https://admin-pf-e-commerce.herokuapp.com",
-		"https://cliente-pf-e-commerce.herokuapp.com",
-		"https://boring-dubinsky-207e29.netlify.app",
-
+		"http://admin-pf-e-commerce.herokuapp.com",
+		"http://cliente-pf-e-commerce.herokuapp.com",
+		"http://boring-dubinsky-207e29.netlify.app",
 	];
 	if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
 		res.header("Access-Control-Allow-Origin", req.headers.origin); // Front-End all url "*"
