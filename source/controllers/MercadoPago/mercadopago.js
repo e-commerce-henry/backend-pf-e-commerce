@@ -45,8 +45,8 @@ const PayMP = async (req, res) => {
 				email: user.email,
 			},
 			back_urls: {
-				success: "proyecto-personal.online/mercadoPago/pagos",
-				failure: "proyecto-personal.online/mercadoPago/pagos",
+				success: "localhost:3001/mercadoPago/pagos",
+				failure: "localhost:3001/mercadoPago/pagos",
 			},
 			payment_methods: {
 				excluded_payment_types: [
