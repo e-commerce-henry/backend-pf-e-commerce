@@ -2,7 +2,7 @@ const { ContactForm } = require("../../db");
 
 const createContactForm = async (req, res) => {
 	const { email, name, subject, content } = req.body;
-
+	console.log(req.body);
 	if (!email || !name || !subject || !content) {
 		return res.status(400).send("Todos los campos son obligatorios");
 	}
