@@ -31,6 +31,7 @@
     "google-auth-library": "^7.11.0",
     "jsonwebtoken": "^8.5.1",
     "mercadopago": "^1.5.12",
+    "nodemailer": "^6.7.2",
     "pg": "^8.7.1",
     "sequelize": "^6.13.0"
   },
