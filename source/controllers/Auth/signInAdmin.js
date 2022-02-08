@@ -2,7 +2,7 @@ const { User, UserLoginDetail } = require("../../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const signIn = async (req, res) => {
+const signInAdmin = async (req, res) => {
 	try {
 		const foundUser = await User.findOne({
 			where: { email: req.body.email },
@@ -10,7 +10,9 @@ const signIn = async (req, res) => {
 		});
 
 		if (!foundUser) {
-			return res.status(400).send("Usuario no encontrado");
+			return res.status(404).send("Usuario no encontrado");
+		} else if (foundUser.role !== "admin") {
+			return res.status(400).json({ msg: "no tiene privilegios de admin" });
 		}
 		bcrypt.compare(
 			req.body.pwd,
@@ -18,10 +20,7 @@ const signIn = async (req, res) => {
 			(err, isMatch) => {
 				if (err) throw err;
 				if (isMatch) {
-					const maxAge =
-						foundUser.role === "admin"
-							? 18000 //seconds - 5hs
-							: 86400; //seconds - 24h
+					const maxAge = 18000;
 					const token = jwt.sign(
 						{ id: foundUser.id },
 						process.env.ACCESS_SECRET,
@@ -39,8 +38,8 @@ const signIn = async (req, res) => {
 			}
 		);
 	} catch (error) {
-		res.status(500).send(err);
+		res.status(500).send(err.message);
 	}
 };
 
-module.exports = signIn;
+module.exports = signInAdmin;

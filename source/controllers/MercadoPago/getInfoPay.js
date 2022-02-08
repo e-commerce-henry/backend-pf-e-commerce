@@ -1,12 +1,19 @@
-const e = require("express");
-const { Order, OrderDetail, Product, Cart, CartItem } = require("../../db");
+const { transporter } = require("../Nodemailer/transporter");
+const {
+	Order,
+	OrderDetail,
+	Product,
+	Cart,
+	CartItem,
+	User,
+} = require("../../db");
 
 const getInfoPay = async (req, res) => {
 	try {
 		const { status, external_reference } = req.query;
 		console.log(status);
 		const order = await Order.findByPk(external_reference, {
-			include: { model: OrderDetail },
+			include: [{ model: OrderDetail }, { model: User }],
 		});
 		const newOrderStatus = status === "approved" ? "completed" : "cancelled";
 
@@ -32,11 +39,18 @@ const getInfoPay = async (req, res) => {
 				return await e.destroy();
 			});
 			await Promise.all(promises2);
+			await transporter.sendMail({
+				from: `ATR Computacion`,
+				to: order.user.email,
+				subject: "Compra exitosa!",
+				text: `Hola! Muchas gracias por tu compra! Tu pedido está siendo preparado. Podrás ver el estado de envio desde tu perfil en nuestra web. Te esperamos pronto en nuestra tienda nuevamente!`,
+				html: `<h2>Hola! Muchas gracias por tu compra!</h2><p>Tu pedido está siendo preparado. Podrás ver el estado de envio desde tu perfil en nuestra web.</p><p>Te esperamos pronto en nuestra tienda nuevamente!</p>`,
+			});
 		}
 
 		newOrderStatus === "completed"
 			? res.redirect("http://localhost:3000/realizado")
-			: res.redirect("http://localhost:3000/rechazada"); // crear componente y rutearlo
+			: res.redirect("http://localhost:3000/rechazada");
 	} catch (err) {
 		res.status(500).send(err);
 	}
