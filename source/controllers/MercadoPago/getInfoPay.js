@@ -40,7 +40,7 @@ const getInfoPay = async (req, res) => {
 			});
 			await Promise.all(promises2);
 			await transporter.sendMail({
-				from: `atrcomputacionstore@gmail.com`,
+				from: `ATR Computación <atrcomputacionstore@gmail.com>`,
 				to: order.user.email,
 				subject: "Compra exitosa!",
 				text: `Hola! Muchas gracias por tu compra! Tu pedido está siendo preparado. Podrás ver el estado de envio desde tu perfil en nuestra web. Te esperamos pronto en nuestra tienda nuevamente!`,
