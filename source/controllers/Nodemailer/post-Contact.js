@@ -5,7 +5,7 @@ const contactEmail = async (req, res) => {
 		const { email, name } = req.body;
 		console.log(email, name);
 		await transporter.sendMail({
-			from: `ATR Computacion`,
+			from: `ATR Computación <atrcomputacionstore@gmail.com>`,
 			to: email,
 			subject: "Tu mensaje ha sido recibido",
 			text: `Hola ${name}! Gracias por contactarnos! Recibimos tu mensaje y pronto estará siendo revisado por nuestro staff.`,
