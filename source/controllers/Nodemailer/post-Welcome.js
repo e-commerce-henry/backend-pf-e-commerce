@@ -5,7 +5,7 @@ const welcomeEmail = async (req, res) => {
 		const { email, name } = req.body;
 
 		await transporter.sendMail({
-			from: `ATR Computacion`,
+			from: `ATR Computación <atrcomputacionstore@gmail.com>`,
 			to: email,
 			subject: "Registro exitoso!",
 			text: `Hola ${name}! Bienvenido a ATR Computación. Tu proceso de registro se ha efectuado correctamente. Te esperamos en nuestra tienda!`,
