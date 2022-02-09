@@ -29,5 +29,11 @@ module.exports = (sequelize) => {
 			type: DataTypes.DATE,
 			allowNull: false,
 		},
+
+		status: {
+			type: DataTypes.ENUM("not answered", "answered"),
+			defaultValue: "not answered",
+			allowNull: false,
+		},
 	});
 };
