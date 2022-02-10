@@ -28,15 +28,15 @@ const forgotPwd = async (req, res) => {
 		const token = jwt.sign(payload, secret, { expiresIn: "15m" });
 		const link = `http://localhost:3001/auth/reset-password-verify/${foundUser.id}/${token}`;
 
-		// await transporter.sendMail({
-		// 	from: `ATR Computación <atrcomputacionstore@gmail.com>`,
-		// 	to: email,
-		// 	subject: "Recuperación de contraseña",
-		// 	text: `Hola! Recibimos una solicitud para generar una nueva contraseña. Por favor, abre el siguiente link y sigue los pasos. Ten en cuenta que dicho link es válido durante 15 minutos solamente. ${link}`,
-		// 	html: `<h2>Hola! Recibimos una solicitud para generar una nueva contraseña.</h2><p>Por favor, abre el siguiente link y sigue los pasos. Ten en cuenta que dicho link es válido durante 15 minutos solamente. </p><br>${link}`,
-		// });
-		//send email with link
-		res.send(link);
+		await transporter.sendMail({
+			from: `ATR Computación <atrcomputacionstore@gmail.com>`,
+			to: email,
+			subject: "Recuperación de contraseña",
+			text: `Hola! Recibimos una solicitud para generar una nueva contraseña. Por favor, abre el siguiente link y sigue los pasos. Ten en cuenta que dicho link es válido durante 15 minutos solamente. ${link}`,
+			html: `<h2>Hola! Recibimos una solicitud para generar una nueva contraseña.</h2><p>Por favor, abre el siguiente link y sigue los pasos. Ten en cuenta que dicho link es válido durante 15 minutos solamente. </p><br>${link}`,
+		});
+
+		res.send({ msg: "mensaje enviado", foundUser });
 	} catch (error) {
 		res.status(500).send(error.message);
 	}
