@@ -6,6 +6,6 @@ const { requireAuth, isAdmin } = require("../middleware/authMiddleware");
 
 router.post("/welcome", welcomeEmail);
 router.post("/contact", contactEmail);
-router.post("/answer/:id", [requireAuth, isAdmin], answerEmail);
+router.post("/answer/:id", answerEmail);
 
 module.exports = router;
