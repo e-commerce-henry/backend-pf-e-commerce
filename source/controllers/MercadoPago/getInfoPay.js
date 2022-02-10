@@ -49,8 +49,8 @@ const getInfoPay = async (req, res) => {
 		}
 
 		newOrderStatus === "completed"
-			? res.redirect("https://nifty-archimedes-2faaf7.netlify.app/realizado")
-			: res.redirect("https://nifty-archimedes-2faaf7.netlify.app/rechazada");
+			? res.redirect("http://cliente-pf-e-commerce.herokuapp.com/realizado")
+			: res.redirect("http://cliente-pf-e-commerce.herokuapp.com/rechazada");
 	} catch (err) {
 		res.status(500).send(err);
 	}
