@@ -26,7 +26,7 @@ const forgotPwd = async (req, res) => {
 			id: foundUser.id,
 		};
 		const token = jwt.sign(payload, secret, { expiresIn: "15m" });
-		const link = `http://localhost:3001/auth/reset-password-verify/${foundUser.id}/${token}`;
+		const link = `http://proyecto-personal.online/auth/reset-password-verify/${foundUser.id}/${token}`;
 
 		await transporter.sendMail({
 			from: `ATR Computación <atrcomputacionstore@gmail.com>`,
