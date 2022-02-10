@@ -18,7 +18,9 @@ const resetPwdVerify = async (req, res) => {
 			process.env.PASSWORD_RESET_SECRET + foundUser.userLoginDetail.password;
 
 		const payload = jwt.verify(token, secret);
-		res.redirect(`https://cliente-pf-e-commerce.herokuapp.com/reset-password/${id}/${token}`);
+		res.redirect(
+			`https://nifty-archimedes-2faaf7.netlify.app/reset-password/${id}/${token}`
+		);
 	} catch (error) {
 		res.status(500).send(error.message);
 	}
